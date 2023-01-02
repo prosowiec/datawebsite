@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+<div class="ui container ">
+  <Divider hidden></Divider>
+  <h1 class="ui dividing header">Car value analyzer</h1> 
+  
+  <h3 class="ui top attached header">Select orgin of data</h3> 
+  <div class="ui attached segment">
+    <div class="ui pointing three item menu">
+      <a class="item" href="otomoto">
+        <i class="tasks icon"></i>
+          OTOMOTO
+      </a>
+      <a class="item" href="autoscout24">
+        <i class="tasks icon"></i>
+          AUTOSCOUT24
+      </a>
+      <a class="item" href="compare_both">
+        <i class="tasks icon"></i>
+          COMPARE BOTH
+      </a>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+
+

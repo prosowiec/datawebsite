@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sqlalchemy
+matplotlib
+numpy
+pandas
+jinja2
+pyodbc
+pymssql
+pypyodbc
+unixodbc

@@ -1,0 +1,158 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+<div class="ui container ">
+  <Divider hidden></Divider>
+  <h1 class="ui dividing header">Car value analyzer</h1> 
+  
+  <h3 class="ui top attached header">Select orgin of data</h3> 
+  <div class="ui attached segment">
+    <div class="ui pointing three item menu">
+      <a class="item" href="otomoto">
+        <i class="tasks icon"></i>
+          OTOMOTO
+      </a>
+      <a class="item " href="autoscout24">
+        <i class="tasks icon"></i>
+          AUTOSCOUT24
+      </a>
+      <a class="active item" href="compare_both">
+        <i class="tasks icon"></i>
+          COMPARE BOTH
+      </a>
+    </div>
+  </div>
+
+  <h2 class="ui dividing header">Filters</h2>
+
+  <form method="post" id="myForm">
+
+    <div class="ui two column grid">
+      <div class="column">
+        <h3 class="ui header">Otomoto</h3>
+        <div class="ui input">
+            <input name= "brand_model_oto" list="brand_model_oto" type="text", placeholder="Enter brand and model">
+            <datalist id="brand_model_oto", name = "brand_model_oto">        
+                {% for brand_model_oto in brand_models_oto %}
+                  <option name= "brand_model_oto" >{{brand_model_oto}}</option>
+                {% endfor %}
+            </datalist>
+        </div>
+
+        <div class="ui input">
+            <input name="oto_year_min" type="text" placeholder="Min. production year" >
+          </div>
+          
+          <div class="ui input">
+            <input name="oto_year_max" type="text" placeholder="Max. production year" >
+          </div>
+          <div class="ui input">
+            
+            <input name="oto_mileage_min" type="text" placeholder="Minimum mileage" >
+          </div>
+          
+          <div class="ui input">
+            <input name="oto_mileage_max" type="text" placeholder="Maximum mileage" >
+          </div>
+
+          <div class="ui input">
+            <input name="oto_price_min" type="text" placeholder="Minimum price" >
+          </div>
+          
+          <div class="ui input">
+            <input name="oto_price_max" type="text" placeholder="Maximum price" >
+          </div>      
+
+          <div class="ui input">
+            <input name="oto_min_eng_cap" type="text" placeholder="Min. engine cap.(cm3)" >
+          </div>
+          
+          <div class="ui input">
+            <input name="oto_max_eng_cap" type="text" placeholder="Max. engine cap.(cm3)" >
+          </div>
+
+      </div>
+
+
+      <div class="column">
+        <h3 class="ui header">Autoscout24</h3>
+        <div class="ui input">
+          <input name= "brand_model_auto" list="brand_model_auto" type="text", placeholder="Enter brand and model">
+          <datalist id="brand_model_auto", name = "brand_model_auto">
+        
+              {% for brand_model_auto in brand_models_auto %}
+                <option name= "brand_model_auto" >{{brand_model_auto}}</option>
+              {% endfor %}
+        
+        
+          </datalist>
+        </div>
+
+        <div class="ui input">
+          <input name="auto_year_min" type="text" placeholder="Min. production year" >
+        </div>
+        
+        <div class="ui input">
+          <input name="auto_year_max" type="text" placeholder="Max. production year" >
+        </div>
+        <div class="ui input">
+          
+          <input name="auto_mileage_min" type="text" placeholder="Minimum mileage" >
+        </div>
+        
+        <div class="ui input">
+          <input name="auto_mileage_max" type="text" placeholder="Maximum mileage" >
+        </div>
+
+        <div class="ui input">
+          <input name="auto_price_min" type="text" placeholder="Minimum price" >
+        </div>
+        
+        <div class="ui input">
+          <input name="auto_price_max" type="text" placeholder="Maximum price" >
+        </div>      
+
+        <div class="ui input">
+          
+          <input name="auto_min_power" type="text" placeholder="Min. power(hp)" >
+        </div>
+        
+        <div class="ui input">
+          <input name="auto_max_power" type="text" placeholder="Max. power(hp)" >
+        </div>
+        
+      </div>
+    </div>
+    <input type="button" value="Show table" onclick="submitForm()" class = "ui blue fluid button">
+  </form>
+</div>
+
+
+<!--<div id="responseArea" class ="image"></div>-->
+
+<div class="ui attached segment">
+  <div id="responseArea" class = "ui image"></div>
+</div>
+
+
+<script>
+    function submitForm() {
+        var formElement = document.getElementById('myForm');
+        var data = new FormData(formElement);
+        fetch('/compare_both', {
+            method: 'POST',
+            body: data,
+            })
+            .then(resp => resp.text())  // or, resp.json(), etc.
+            .then(data => {
+            document.getElementById("responseArea").innerHTML = data;
+            })
+            .catch(error => {
+            console.error(error);
+            });
+    }
+</script>
+
+{% endblock %}

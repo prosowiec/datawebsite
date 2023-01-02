@@ -1,0 +1,1 @@
+{"id":"f2a920fc-1e5f-425e-b636-56d775ef38dc","space":46095,"runtime":"python3.9","name":"data_website","path":"stbet6","project":"a0akimq6","account":"144798365827","region":"eu-central-1","deps":["fastapi","uvicorn","sqlalchemy","matplotlib","numpy","pandas","jinja2","pyodbc","pymssql","pypyodbc"],"envs":null,"public":true,"log_level":"off","cron":""}
