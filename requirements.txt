@@ -8,3 +8,5 @@ jinja2
 pyodbc
 pymssql
 gunicorn
+httptools
+uvloop
