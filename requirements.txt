@@ -9,3 +9,4 @@ pyodbc
 pymssql
 pypyodbc
 unixodbc
+pyodbc
