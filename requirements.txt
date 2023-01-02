@@ -7,4 +7,3 @@ pandas
 jinja2
 pyodbc
 pymssql
-pypyodbc
