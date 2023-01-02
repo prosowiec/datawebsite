@@ -6,6 +6,7 @@ numpy
 pandas
 jinja2
 pyodbc
+pypyodbc
 pymssql
 gunicorn
 httptools

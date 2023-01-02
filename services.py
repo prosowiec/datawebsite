@@ -1,7 +1,6 @@
 import database as _database
 import sqlalchemy.orm as _orm
 from sqlalchemy.sql import func
-#import urllib
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from io import StringIO
 import numpy as np
