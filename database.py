@@ -6,7 +6,6 @@ import urllib
 import os
 
 server = urllib.parse.quote_plus(str(os.environ.get('DBHOST','fastapi')))
-#server = "{}.database.windows.net".format(server)
 database = urllib.parse.quote_plus(str(os.environ.get('DBNAME','fastapi')))
 username = urllib.parse.quote_plus(str(os.environ.get('DBUSER','fastapi')))
 password = urllib.parse.quote_plus(str(os.environ.get('DBPASS','fastapi')))
