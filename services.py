@@ -53,7 +53,7 @@ def get_offer_otomoto(db,brand:str,model:str, mileage_min:int ='',mileage_max:in
 
     y_avg_price = y_avg_price.astype(int)
     y_avg_mileage = y_avg_mileage.astype(int)
-
+    volume = volume.astype(int)
 
     return x_year,y_avg_price,y_avg_mileage,volume
 
@@ -95,7 +95,7 @@ def get_offer_autoscout24(db,brand:str,model:str, mileage_min:int ='',mileage_ma
     y_avg_price = y_avg_price.astype(int)
     y_avg_mileage = y_avg_mileage.astype(int)
     volume = volume.astype(int)
-    #np.multiply(y_avg_price, 4.69 )
+
     y_avg_price = y_avg_price * 4.69
 
 
