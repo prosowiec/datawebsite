@@ -5,10 +5,11 @@ from sqlalchemy.engine import URL
 import urllib
 import os
 
-server = "{}.database.windows.net".format(dbhost=os.environ['DBHOST'])
-database = os.environ['DBNAME']
-username = os.environ['DBUSER']
-password = os.environ['DBPASS']
+server = urllib.parse.quote_plus(str(os.environ.get('DBHOST','fastapi')))
+#server = "{}.database.windows.net".format(server)
+database = urllib.parse.quote_plus(str(os.environ.get('DBNAME','fastapi')))
+username = urllib.parse.quote_plus(str(os.environ.get('DBUSER','fastapi')))
+password = urllib.parse.quote_plus(str(os.environ.get('DBPASS','fastapi')))
 
 driver = '{ODBC Driver 17 for SQL Server}'
 
