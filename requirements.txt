@@ -12,3 +12,4 @@ gunicorn
 httptools
 uvloop
 requests
+python-multipart
