@@ -13,3 +13,4 @@ httptools
 uvloop
 requests
 python-multipart
+gevent
