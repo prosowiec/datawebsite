@@ -11,3 +11,4 @@ pymssql
 gunicorn
 httptools
 uvloop
+requests
