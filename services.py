@@ -97,7 +97,7 @@ def get_offer_autoscout24(db,brand:str,model:str, mileage_min:int ='',mileage_ma
     volume = volume.astype(int)
 
     y_avg_price = y_avg_price * 4.69
-
+    y_avg_price = y_avg_price.astype(int)
 
     return x_year,y_avg_price,y_avg_mileage,volume
 
@@ -106,11 +106,11 @@ def charts(x_year,y_avg_price,y_avg_mileage,volume):
     
     chart1 = plots.price_bar(x_year=x_year,y_avg_price=y_avg_price)
     chart2 = plots.mileage_bar(x_year=x_year,y_avg_mileage =y_avg_mileage)
-    chart3 = plots.price_and_mileage_bar(x_year=x_year,y_avg_price=y_avg_price, y_avg_mileage = y_avg_mileage)
+    #chart3 = plots.price_and_mileage_bar(x_year=x_year,y_avg_price=y_avg_price, y_avg_mileage = y_avg_mileage)
     chart4 = plots.price_and_mileage_plot(x_year=x_year,y_avg_price=y_avg_price, y_avg_mileage = y_avg_mileage)
     chart5 = plots.volume_bar(x_year=x_year,volume =volume)
 
-    return chart1, chart2,chart3, chart4,chart5
+    return chart1, chart2, chart4,chart5
 
 
     

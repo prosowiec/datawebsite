@@ -40,9 +40,9 @@ async def submit_otomoto(request: _fastapi.Request):
         x_year,y_avg_price,y_avg_mileage,volume = _services.get_offer_otomoto(db = db,brand=brand,model=model,mileage_min=mileage_min,mileage_max=mileage_max
         ,year_min=year_min, year_max= year_max, price_max= price_max,price_min=price_min, min_eng_cap=min_eng_cap, max_eng_cap=max_eng_cap)
 
-        chart1, chart2,chart3, chart4,chart5 = _services.charts(x_year,y_avg_price,y_avg_mileage,volume)
+        chart1, chart2, chart4,chart5 = _services.charts(x_year,y_avg_price,y_avg_mileage,volume)
         
-        return chart1 + ' <br><br> ' +chart2 +' <br><br>' + chart5 +' <br><br>' +chart3 + ' <br><br>' + chart4+ ' <br><br>'
+        return chart1 + ' <br><br> ' + chart5 +' <br><br>' +  chart2 + ' <br><br>' + chart4+ ' <br><br>'
     except IndexError:
         return '<div class="ui warning message"><i class="close icon"></i><div class="header">Result not found</div>Change filter settings</div>'
     
@@ -69,8 +69,8 @@ async def submit_autoscout24(request: _fastapi.Request):
         x_year,y_avg_price,y_avg_mileage,volume = _services.get_offer_autoscout24(db = db,brand=brand,model=model,mileage_min=mileage_min,mileage_max=mileage_max
         ,year_min=year_min, year_max= year_max, price_max= price_max,price_min=price_min, min_power=min_power, max_power=max_power)
         
-        chart1, chart2,chart3, chart4,chart5 = _services.charts(x_year,y_avg_price,y_avg_mileage,volume)
-        return chart1 + ' <br><br> ' +chart2 +' <br><br>' + chart5 +' <br><br>' +chart3 + ' <br><br>' + chart4+ ' <br><br>'
+        chart1, chart2, chart4,chart5 = _services.charts(x_year,y_avg_price,y_avg_mileage,volume)
+        return chart1 + ' <br><br> ' + chart5 +' <br><br>' +  chart2 + ' <br><br>' + chart4+ ' <br><br>'
     except IndexError:
         return '<div class="ui warning message"><i class="close icon"></i><div class="header">Result not found</div>Change filter settings</div>'
 
