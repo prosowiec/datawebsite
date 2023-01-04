@@ -10,10 +10,6 @@ database = urllib.parse.quote_plus(str(os.environ.get('DBNAME')))
 username = urllib.parse.quote_plus(str(os.environ.get('DBUSER')))
 password = urllib.parse.quote_plus(str(os.environ.get('DBPASS')))
 
-server = "carvalueanalyzer.database.windows.net"
-database = "scraped_data"
-username = "prosolukaszj"
-password = "oto_auto0234!"
 
 driver = '{ODBC Driver 17 for SQL Server}'
 
