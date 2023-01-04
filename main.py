@@ -115,9 +115,8 @@ async def get_compare_both(request: _fastapi.Request):
         auto_x_year,auto_y_avg_price,auto_y_avg_mileage,auto_volume,oto_x_year,oto_y_avg_price,oto_y_avg_mileage,oto_volume = _services.validate_x(
             auto_x_year,auto_y_avg_price,auto_y_avg_mileage,auto_volume,oto_x_year,oto_y_avg_price,oto_y_avg_mileage,oto_volume
         )
-        
-        chart = plots.compare_price(oto_x_year,auto_x_year,oto_y_avg_price,auto_y_avg_price)
-        chart2 = plots.compare_mileage(oto_x_year,auto_x_year,oto_y_avg_mileage,auto_y_avg_mileage)
+        chart , chart2 = _services.charts_compare(oto_x_year,auto_x_year,oto_y_avg_price,auto_y_avg_price,oto_y_avg_mileage,auto_y_avg_mileage)
+
         return chart + chart2
 
     except IndexError:

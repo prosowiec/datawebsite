@@ -4,6 +4,7 @@ from sqlalchemy.sql import func
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from io import StringIO
 import numpy as np
+from multiprocessing import Pool
 
 import plots
 import database as _database
@@ -104,16 +105,30 @@ def get_offer_autoscout24(db,brand:str,model:str, mileage_min:int ='',mileage_ma
 
 def charts(x_year,y_avg_price,y_avg_mileage,volume):
     
-    chart1 = plots.price_bar(x_year=x_year,y_avg_price=y_avg_price)
-    chart2 = plots.mileage_bar(x_year=x_year,y_avg_mileage =y_avg_mileage)
-    #chart3 = plots.price_and_mileage_bar(x_year=x_year,y_avg_price=y_avg_price, y_avg_mileage = y_avg_mileage)
-    chart4 = plots.price_and_mileage_plot(x_year=x_year,y_avg_price=y_avg_price, y_avg_mileage = y_avg_mileage)
-    chart5 = plots.volume_bar(x_year=x_year,volume =volume)
+    with Pool(processes=4) as pool:
+        chart1 = pool.apply_async(plots.price_bar, (x_year,y_avg_price,))
+        chart2 = pool.apply_async(plots.mileage_bar, (x_year,y_avg_mileage ,))
+        chart4 = pool.apply_async(plots.price_and_mileage_plot, (x_year,y_avg_price, y_avg_mileage,))
+        chart5 = pool.apply_async(plots.volume_bar, (x_year,volume ,))
 
+        chart1 = chart1.get()
+        chart2 = chart2.get()
+        chart4 = chart4.get()
+        chart5 = chart5.get()
+   
     return chart1, chart2, chart4,chart5
 
 
+def charts_compare(oto_x_year,auto_x_year,oto_y_avg_price,auto_y_avg_price,oto_y_avg_mileage,auto_y_avg_mileage):
     
+    with Pool(processes=2) as pool:
+        chart = pool.apply_async(plots.compare_price,(oto_x_year,auto_x_year,oto_y_avg_price,auto_y_avg_price,))
+        chart2 = pool.apply_async(plots.compare_mileage,(oto_x_year,auto_x_year,oto_y_avg_mileage,auto_y_avg_mileage,))
+
+        chart = chart.get()
+        chart2 = chart2.get()
+
+    return chart, chart2  
 
 def validate_x(auto_x_year,auto_y_avg_price,auto_y_avg_mileage,auto_volume,oto_x_year,oto_y_avg_price,oto_y_avg_mileage,oto_volume):
     
