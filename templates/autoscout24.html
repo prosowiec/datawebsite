@@ -78,11 +78,16 @@
   </form>
 </div>
 
-
-<div id="responseArea" class ="ui vertical segment"></div>
+<div id="loadingGif" style="display:none"><img class="ui centered small image" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"></div>
+<div id="responseArea" class ="ui vertical segment" ></div>
 
 <script>
+  
     function submitForm() {
+        document.getElementById('loadingGif').style.display = "block";
+        setTimeout(function() {
+          document.getElementById('loadingGif').style.display = "none";},2000);
+        
         var formElement = document.getElementById('myForm');
         var data = new FormData(formElement);
         fetch('/submit_autoscout24', {

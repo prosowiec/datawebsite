@@ -15,6 +15,18 @@ app = _fastapi.FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 
+@app.on_event("startup")
+async def startup_event():
+    global db
+    db = _services._database.SessionLocal()
+    try:
+        db.commit()
+    except:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
 
 @app.post("/submit_otomoto")
 async def submit_otomoto(request: _fastapi.Request):
@@ -34,7 +46,7 @@ async def submit_otomoto(request: _fastapi.Request):
         return 'Enter brand and model!!!'
 
     brand , model = brand_model.split(' ', 1)
-    db = _services._database.SessionLocal()
+    
 
     try:
         x_year,y_avg_price,y_avg_mileage,volume = _services.get_offer_otomoto(db = db,brand=brand,model=model,mileage_min=mileage_min,mileage_max=mileage_max
@@ -61,10 +73,10 @@ async def submit_autoscout24(request: _fastapi.Request):
     price_max = form_data['price_max']
     
     if brand_model == '':
-        return 'Enter brand and model!!!'
+        return '<div class="ui header">Enter brand and model!!!</div>'
 
     brand , model = brand_model.split(' ', 1)
-    db = _services._database.SessionLocal()
+
     try:
         x_year,y_avg_price,y_avg_mileage,volume = _services.get_offer_autoscout24(db = db,brand=brand,model=model,mileage_min=mileage_min,mileage_max=mileage_max
         ,year_min=year_min, year_max= year_max, price_max= price_max,price_min=price_min, min_power=min_power, max_power=max_power)
@@ -77,7 +89,7 @@ async def submit_autoscout24(request: _fastapi.Request):
 
 @app.post("/compare_both")
 async def get_compare_both(request: _fastapi.Request):
-    db = _services._database.SessionLocal()
+
     form_data = await request.form()
     brand_model_oto = form_data['brand_model_oto']
     oto_year_min = form_data['oto_year_min']
