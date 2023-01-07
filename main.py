@@ -20,9 +20,11 @@ async def startup_event():
     global db
     db = _services._database.SessionLocal()
     try:
-        db.close()
+        db = _services._database.SessionLocal()
     except:
         db.rollback()
+        raise
+    finally:
         db.close()
 
 
