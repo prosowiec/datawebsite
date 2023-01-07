@@ -18,7 +18,6 @@ templates = Jinja2Templates(directory="templates")
 @app.on_event("startup")
 async def startup_event():
     global db
-    db = _services._database.SessionLocal()
     try:
         db = _services._database.SessionLocal()
     except:
