@@ -6,9 +6,9 @@ from io import BytesIO
 
 def to_html(fig):    
     tmpfile = BytesIO()
-    fig.savefig(tmpfile, format='png')
+    fig.savefig(tmpfile, format='png', dpi=85)
     encoded = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
-    html = '<img class="ui centered image"  src=\'data:image/png;base64,{}\'>'.format(encoded)
+    html = '<img class=\'{}\'  src=\'data:image/png;base64,{}\'>'.format('ui centered image',encoded)
     return html
 
 def price_bar(x_year,y_avg_price):

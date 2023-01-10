@@ -1,13 +1,6 @@
 import fastapi as _fastapi
-import sqlalchemy.orm as _orm
-from typing import List
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
-from fastapi import Form
-
 from brand_models import brand_models_oto, brand_models_auto
-from models import offer_table_otomoto
-import plots
 import services as _services
 
 app = _fastapi.FastAPI()
@@ -42,7 +35,7 @@ async def submit_otomoto(request: _fastapi.Request):
     price_max = form_data['price_max']
     
     if brand_model == '':
-        return 'Enter brand and model!!!'
+        return '<div class=\'ui warning message\'><i class=\'close icon\'></i><div class=\'ui header\'>Result not found</div>Please enter brand and model</div>'
 
     brand , model = brand_model.split(' ', 1)
     
@@ -53,9 +46,9 @@ async def submit_otomoto(request: _fastapi.Request):
 
         chart1, chart2, chart4,chart5 = _services.charts(x_year,y_avg_price,y_avg_mileage,volume)
         
-        return chart1 + ' <br><br> ' + chart5 +' <br><br>' +  chart2 + ' <br><br>' + chart4+ ' <br><br>'
+        return chart1 + chart5 +  chart2  + chart4
     except IndexError:
-        return '<div class="ui warning message"><i class="close icon"></i><div class="header">Result not found</div>Change filter settings</div>'
+        return '<div class=\'ui warning message\'><i class=\'close icon\'></i><div class=\'ui header\'>Result not found</div>Change filter settings</div>'
     
 
 @app.post("/submit_autoscout24")
@@ -72,7 +65,7 @@ async def submit_autoscout24(request: _fastapi.Request):
     price_max = form_data['price_max']
     
     if brand_model == '':
-        return '<div class="ui header">Enter brand and model!!!</div>'
+        return '<div class=\'ui warning message\'><i class=\'close icon\'></i><div class=\'ui header\'>Result not found</div>Please enter brand and model</div>'
 
     brand , model = brand_model.split(' ', 1)
 
@@ -81,9 +74,9 @@ async def submit_autoscout24(request: _fastapi.Request):
         ,year_min=year_min, year_max= year_max, price_max= price_max,price_min=price_min, min_power=min_power, max_power=max_power)
         
         chart1, chart2, chart4,chart5 = _services.charts(x_year,y_avg_price,y_avg_mileage,volume)
-        return chart1 + ' <br><br> ' + chart5 +' <br><br>' +  chart2 + ' <br><br>' + chart4+ ' <br><br>'
+        return chart1 + chart5 +  chart2  + chart4
     except IndexError:
-        return '<div class="ui warning message"><i class="close icon"></i><div class="header">Result not found</div>Change filter settings</div>'
+        return '<div class=\'ui warning message\'><i class=\'close icon\'></i><div class=\'ui header\'>Result not found</div>Change filter settings</div>'
 
 
 @app.post("/compare_both")
@@ -112,6 +105,9 @@ async def get_compare_both(request: _fastapi.Request):
 
     oto_brand , oto_model = brand_model_oto.split(' ', 1)
     auto_brand , auto_model = brand_model_auto.split(' ', 1)
+    
+    if not oto_brand or not auto_brand:
+        return '<div class=\'ui warning message\'><i class=\'close icon\'></i><div class=\'ui header\'>Result not found</div>Please enter brand and model</div>'
 
     try:
         auto_x_year,auto_y_avg_price,auto_y_avg_mileage,auto_volume = _services.get_offer_autoscout24(db = db,brand=auto_brand,model=auto_model,
@@ -131,12 +127,7 @@ async def get_compare_both(request: _fastapi.Request):
         return chart + chart2
 
     except IndexError:
-        return '<div class="ui warning message"><i class="close icon"></i><div class="header">Result not found</div>Change filter settings</div>'
-
-
-
-
-
+        return '<div class=\'ui warning message\'><i class=\'close icon\'></i><div class=\'ui header\'>Result not found</div>Change filter settings</div>'
 
 
 @app.get("/")
