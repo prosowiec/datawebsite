@@ -113,9 +113,12 @@ async def get_compare_both(request: _fastapi.Request):
     oto_brand , oto_model = brand_model_oto.split(' ', 1)
     auto_brand , auto_model = brand_model_auto.split(' ', 1)
     
-    if not oto_brand or not auto_brand:
+    if not brand_model_oto or not brand_model_auto:
         return '<div class=\'ui warning message\'><i class=\'close icon\'></i><div class=\'ui header\'>Result not found</div>Please enter brand and model</div>'
 
+    oto_brand , oto_model = brand_model_oto.split(' ', 1)
+    auto_brand , auto_model = brand_model_auto.split(' ', 1)
+    
     try:
         auto_x_year,auto_y_avg_price,auto_y_avg_mileage,auto_volume = _services.get_offer_autoscout24(db = db,brand=auto_brand,model=auto_model,
         mileage_min=auto_mileage_min,mileage_max=auto_mileage_max,year_min=auto_year_min, year_max= auto_year_max, price_max= auto_price_max,
