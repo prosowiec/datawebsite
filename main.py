@@ -19,6 +19,13 @@ async def startup_event():
     finally:
         db.close()
 
+@app.on_event("shutdown")
+async def shutdown_event():
+    try:
+        db.close()
+    except:
+        db.rollback()
+        db.close()
 
 @app.post("/submit_otomoto")
 async def submit_otomoto(request: _fastapi.Request):

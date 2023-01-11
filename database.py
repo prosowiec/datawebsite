@@ -11,6 +11,7 @@ username = urllib.parse.quote_plus(str(os.environ.get('DBUSER')))
 password = urllib.parse.quote_plus(str(os.environ.get('DBPASS')))
 
 
+
 driver = '{ODBC Driver 17 for SQL Server}'
 
 odbc_str = 'DRIVER='+driver+';SERVER='+server+';PORT=1433;UID='+username+';DATABASE='+ database + ';PWD='+ password
