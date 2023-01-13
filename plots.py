@@ -160,7 +160,7 @@ def compare_mileage(oto_x_year,auto_x_year,oto_y_avg_mileage,auto_y_avg_mileage)
     width = 0.35
     ax2=ax.twinx()
     y_max = max(auto_y_avg_mileage.max(),oto_y_avg_mileage.max())
-    y_min = min(auto_y_avg_mileage.min(),auto_y_avg_mileage.min())
+    y_min = min(auto_y_avg_mileage.min(),oto_y_avg_mileage.min())
 
     line1 = ax.plot(x_oto , oto_y_avg_mileage,'o-', width, label='OTOMOTO',color="tab:blue")
     line2 = ax2.plot(x_auto , auto_y_avg_mileage,'o-', width, label='AUTOSCOUT' ,color="orange")
