@@ -1,6 +1,6 @@
 # Car value analyzer #
 ### https://carvalueanalyzer.azurewebsites.net/compare_both ###
-**_Site is currently offline due to azure subscribtion fee_**
+>**_Site is currently offline due to azure subscribtion fee_**
 
 
 A website to display data from over 500,000 car listings from Otomoto and Autoscout24. Users can generate reports showing Matplotlib graphs of average mileage, price 
