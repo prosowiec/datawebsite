@@ -8,7 +8,7 @@ from multiprocessing import Pool
 
 import plots
 import database as _database
-from models import offer_table_otomoto,offer_table_autoscout
+from models import offer_table_otomoto, offer_table_autoscout
 
 def get_db():
     db = _database.SessionLocal()
@@ -26,7 +26,7 @@ def get_offer_otomoto(db,brand:str,model:str, mileage_min:int ='',mileage_max:in
     offers = db.query(offer_table_otomoto.brand,offer_table_otomoto.model,offer_table_otomoto.production_date,
     func.avg(offer_table_otomoto.price),func.avg(offer_table_otomoto.mileage),func.count(offer_table_otomoto.brand)).group_by(
     offer_table_otomoto.production_date,offer_table_otomoto.brand,offer_table_otomoto.model).filter(
-    offer_table_otomoto.brand == brand,offer_table_otomoto.model == model,offer_table_otomoto.currency =='PLN').order_by(offer_table_otomoto.production_date)
+    offer_table_otomoto.brand == brand,offer_table_otomoto.model == model).order_by(offer_table_otomoto.production_date)
 
     if mileage_min != '':
         offers = offers.filter(offer_table_otomoto.mileage >= mileage_min)

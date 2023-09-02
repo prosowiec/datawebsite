@@ -7,7 +7,7 @@ import database as _database
 
 
 class offer_table_otomoto(_database.Base):
-    __tablename__ = 'otomoto_scraped_data'
+    __tablename__ = 'otomoto_data'
     brand = _sql.Column(_sql.String)
     model = _sql.Column(_sql.String)
     production_date = _sql.Column(_sql.Integer)
