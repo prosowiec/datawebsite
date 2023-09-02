@@ -14,4 +14,3 @@ uvloop
 requests
 python-multipart
 gevent
-multiprocessing 
