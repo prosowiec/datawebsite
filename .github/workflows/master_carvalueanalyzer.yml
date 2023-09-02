@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'carvalueanalyzer'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_590A1B5B198047ACAFF0A693300C5C81 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5F98A7E772344C5AAE534847BBBE6B05 }}
